@@ -4,7 +4,7 @@ public class Work {
     private int id;
     private String title;
     private int note;
-    private Plataform plataform;
+    private String plataform;
 
     public int getId() {
         return id;
@@ -30,11 +30,11 @@ public class Work {
         this.note = note;
     }
 
-    public Plataform getPlataform() {
+    public String getPlataform() {
         return plataform;
     }
 
-    public void setPlataform(Plataform plataform) {
+    public void setPlataform(String plataform) {
         this.plataform = plataform;
     }
 }
