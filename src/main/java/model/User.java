@@ -9,9 +9,6 @@ public class User {
     private String cpf;
     private String email;
     private String password;
-    private Movie movie;
-    private Cartoon cartoon;
-    private Book book;
 
     public int getId() {
         return id;
@@ -53,27 +50,4 @@ public class User {
         this.password = password;
     }
 
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public Cartoon getCartoon() {
-        return cartoon;
-    }
-
-    public void setCartoon(Cartoon cartoon) {
-        this.cartoon = cartoon;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
 }

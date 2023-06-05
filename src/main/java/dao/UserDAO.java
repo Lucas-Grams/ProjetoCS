@@ -11,7 +11,7 @@ public class UserDAO {
         User user = new User();
 
         try(Connection connection = new ConnectDB().getConexao()){
-            this.sql = "SELECT * FROM user WHERE id_user = ? ";
+            this.sql = "SELECT * FROM user_ WHERE id_user = ? ";
             this.stmt = connection.prepareStatement(this.sql);
             stmt.setInt(1, u.getId());
             this.rs = stmt.executeQuery();
@@ -30,7 +30,7 @@ public class UserDAO {
 
     public boolean setUser(User u){//Método utilizado para inserir um usuário no banco de dados//
         try(Connection connection = new ConnectDB().getConexao()){
-            this.sql = "INSERT INTO user (name, cpf, email, password) VALUES (?,?,?,?)";
+            this.sql = "INSERT INTO user_ (name, cpf, email, password) VALUES (?,?,?,?)";
             this.stmt = connection.prepareStatement(this.sql);
             this.stmt.setString(1, u.getName());
             this.stmt.setString(2, u.getCpf());
@@ -46,7 +46,7 @@ public class UserDAO {
 
     public boolean upUser(User u){//Método utilizadp para editar um usuário no banco de dados//
         try(Connection connection = new ConnectDB().getConexao()){
-            this.sql = "UPDATE user SET name = ?, cpf = ?, email = ?, password = ?";
+            this.sql = "UPDATE user_ SET name = ?, cpf = ?, email = ?, password = ?";
             this.stmt = connection.prepareStatement(this.sql);
             this.stmt.setString(1, u.getName());
             this.stmt.setString(2, u.getCpf());
@@ -62,7 +62,7 @@ public class UserDAO {
 
     public boolean dellUser(User u){//método utilizado para deletar um usuário do banco de dados//smi
         try(Connection connection = new ConnectDB().getConexao()){
-            this.sql = "DELETE FROM user WHERE id_user = ?";
+            this.sql = "DELETE FROM user_ WHERE id_user = ?";
             this.stmt = connection.prepareStatement(this.sql);
             this.stmt.setInt(1, u.getId());
             this.stmt.executeQuery();
