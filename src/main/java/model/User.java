@@ -9,9 +9,6 @@ public class User {
     private String cpf;
     private String email;
     private String password;
-    private Movie movie;
-    private Cartoon cartoon;
-    private Book book;
 
     public int getId() {
         return id;
