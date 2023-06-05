@@ -53,15 +53,15 @@ public class MovieDAO {
         return false;
     }
 
-    public boolean upMovies(Movie m, User u){
+    public boolean upMovie(Movie m, User u){
         try(Connection connection = new ConnectDB().getConexao()) {
-            this.sql = "UPDATE movie SET title = ?, note = ?, duration = ?, plataform = ? WHERE id_user = ?";
+            this.sql = "UPDATE movie SET title = ?, note = ?, duration = ?, plataform = ? WHERE id_movie = ?";
             this.stmt = connection.prepareStatement(this.sql);
             this.stmt.setString(1, m.getTitle());
             this.stmt.setInt(2, m.getNote());
             this.stmt.setInt(3, m.getDuration());
             this.stmt.setString(4, m.getPlataform());
-            this.stmt.setInt(5, u.getId());
+            this.stmt.setInt(5, m.getId());
             this.stmt.execute();
             return true;
         }catch(SQLException e){
