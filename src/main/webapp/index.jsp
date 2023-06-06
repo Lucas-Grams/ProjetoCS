@@ -11,7 +11,8 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
             <h2 class="text-center mb-4">Login</h2>
-            <form id="login-form" action="">
+            <form id="login-form" action="UserController">
+                <input type="hidden" name="acao" value="login">
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" class="form-control" id="email" name="email" required placeholder="email@email.com">

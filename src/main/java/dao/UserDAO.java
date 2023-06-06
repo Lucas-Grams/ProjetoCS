@@ -2,18 +2,19 @@ package dao;
 
 import model.User;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UserDAO {
     private String sql;
     private PreparedStatement stmt;
     private ResultSet rs;
-    public User getUser(User u){//Método utilizado para buscar um usuário do banco de dados//
+    public ArrayList<User> getUsers(){//Método utilizado para buscar um usuário do banco de dados//
+        ArrayList<User> users = new ArrayList<User>();
         User user = new User();
 
         try(Connection connection = new ConnectDB().getConexao()){
-            this.sql = "SELECT * FROM user_ WHERE id_user = ? ";
+            this.sql = "SELECT * FROM user_  ";
             this.stmt = connection.prepareStatement(this.sql);
-            stmt.setInt(1, u.getId());
             this.rs = stmt.executeQuery();
             while(this.rs.next()){
                 user.setId(this.rs.getInt("id_user"));
@@ -21,11 +22,12 @@ public class UserDAO {
                 user.setCpf(this.rs.getString("cpf"));
                 user.setEmail(this.rs.getString("email"));
                 user.setPassword(this.rs.getString("password"));
+                users.add(user);
             }
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return user;
+        return users;
     }
 
     public boolean setUser(User u){//Método utilizado para inserir um usuário no banco de dados//
