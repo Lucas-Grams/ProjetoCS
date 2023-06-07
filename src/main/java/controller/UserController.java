@@ -3,6 +3,7 @@ package controller;
 import model.User;
 import service.UserService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,17 +21,53 @@ public class UserController extends HttpServlet {
         String password = req.getParameter("password");
         String name = req.getParameter("name");
         String cpf = req.getParameter("cpf");
-        switch (acao){
-            case "login":
-                User u = new User();
+        int id = Integer.parseInt(req.getParameter("id"));
+        User u = new User();
+        UserService us = new UserService();
+        RequestDispatcher rd;
+        switch (acao) {
+            case "login" -> {
                 u.setEmail(email);
                 u.setPassword(password);
-                UserService us = new UserService();
-                if(us.login(u)){
-
+                User u2 = us.login(u);
+                if (u2 != null) {
+                    System.out.println("logou");
+                    req.setAttribute("user", u2);
+                    rd = req.getRequestDispatcher("mainMenu.jsp");
                 }
-
-                break;
+            }
+            case "insert" -> {
+                u.setName(name);
+                u.setCpf(cpf);
+                u.setEmail(email);
+                u.setPassword(password);
+                if (us.insertUser(u)) {
+                    System.out.println("cadastrou");
+                    rd = req.getRequestDispatcher("index.jsp");
+                }
+            }
+            case "editUser" -> {
+                u = us.getUserId(id);
+                req.setAttribute("user", u);
+                rd = req.getRequestDispatcher("insertUser.jsp");
+            }
+            case "edit" -> {
+                u.setId(id);
+                u.setName(name);
+                u.setCpf(cpf);
+                u.setEmail(email);
+                u.setPassword(password);
+                if (us.editUser(u)) {
+                    System.out.println("editou");
+                    rd = req.getRequestDispatcher("mainMenu.jsp");
+                }
+            }
+            case "dell" -> {
+                if (us.dellUser(id)) {
+                    System.out.println("excluiu o user");
+                    //codigos de redirecionamento//
+                }
+            }
         }
 
     }

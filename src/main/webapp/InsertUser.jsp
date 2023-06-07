@@ -11,9 +11,17 @@
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
-            <h2 class="text-center mb-4">Login</h2>
-            <form id="login-form" action="UserController" method="post">
-                <input type="hidden" name="acao" value="login">
+            <h2 class="text-center mb-4">Cadastro de Usuário</h2>
+            <form id="register-form" method="post" action="UserController">
+                <input type="hidden" name="acao" value="insert">
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" class="form-control" id="name" name="name" required placeholder="Meu Nome">
+                </div>
+                <div class="form-group">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" class="form-control" id="cpf" name="cpf" required placeholder="xxx.xxx.xxx-xx">
+                </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" class="form-control" id="email" name="email" required placeholder="email@email.com">
@@ -22,9 +30,13 @@
                     <label for="password">Senha:</label>
                     <input type="password" class="form-control" id="password" name="password" required placeholder="insiraSuaSenha123">
                 </div>
-                <button type="submit" class="btn btn-success btn-block">Entrar</button>
+                <div class="form-group">
+                    <label for="confirm-password">Confirmação de Senha:</label>
+                    <input type="password" class="form-control" id="confirm-password" name="confirm-password" required placeholder="insiraSuaSenha123">
+                </div>
+                <button type="submit" class="btn btn-success btn-block">Cadastrar</button>
+                <a href="index.jsp" class="btn btn-primary btn-block">Voltar</a>
             </form>
-            <h5>Ainda não tem conta? Faça uma <a href="InsertUser.jsp">agora</a> mesmo!</h5>
         </div>
     </div>
 </div>
