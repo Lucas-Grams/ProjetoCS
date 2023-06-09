@@ -1,6 +1,5 @@
 package model;
 
-import sun.security.util.Password;
 
 public class User {
 
@@ -50,27 +49,4 @@ public class User {
         this.password = password;
     }
 
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
-
-    public Cartoon getCartoon() {
-        return cartoon;
-    }
-
-    public void setCartoon(Cartoon cartoon) {
-        this.cartoon = cartoon;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
 }

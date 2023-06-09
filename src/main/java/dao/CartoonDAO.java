@@ -9,11 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CartoonDAO{
+
+public class CartoonDAO {
     private String sql;
     private PreparedStatement stmt;
     private ResultSet rs;
-
     public ArrayList<Cartoon> getCartoons(User u){
         ArrayList<Cartoon> cartoons = new ArrayList<Cartoon>();
         Cartoon cartoon = new Cartoon();
@@ -27,6 +27,10 @@ public class CartoonDAO{
                 cartoon.setTitle(rs.getString("title"));
                 cartoon.setNote(rs.getInt("note"));
                 cartoon.setEpisodes(rs.getInt("pages"));
+                cartoon.setId(rs.getInt("id_cartoon"));
+                cartoon.setTitle(rs.getString("title"));
+                cartoon.setNote(rs.getInt("note"));
+                cartoon.setEpisodes(rs.getInt("episodes"));
                 cartoon.setPlataform(rs.getString("plataform"));
                 cartoons.add(cartoon);
             }
@@ -73,6 +77,7 @@ public class CartoonDAO{
     public boolean dellCartoon(Cartoon c){
         try(Connection connection = new ConnectDB().getConexao()){
             this.sql = "DELETE FROM cartoon WHERE id_cartoon = ?";
+            this.sql = "DELETE FROM cartton WHERE id_cartoon = ?";
             this.stmt = connection.prepareStatement(this.sql);
             this.stmt.setInt(1, c.getId());
             return this.stmt.execute();
@@ -81,6 +86,4 @@ public class CartoonDAO{
         }
         return false;
     }
-
-
 }

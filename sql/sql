@@ -1,0 +1,43 @@
+CREATE DATABASE poo;
+
+CREATE TABLE user_ (
+	id_user serial,
+	name varchar(40),
+	cpf varchar(11),
+	email varchar(40),
+	password varchar(12),
+	primary key (id_user)
+);
+
+CREATE TABLE cartoon(
+	id_cartoon serial,
+	id_user int,
+	title varchar(40),
+	episodes int,
+	note int,
+	plataform varchar(40),
+	primary key(id_cartoon),
+	foreign key(id_user) references user_(id_user)
+);
+
+CREATE TABLE book(
+    id_book serial,
+    id_user int,
+    title varchar(40),
+    pages int,
+    note int;
+    plataform varchar(40),
+    primary key(id_book),
+    foreign key(id_user) references user_(id_user)
+);
+
+CREATE TABLE movie(
+    id_movie serial,
+    id_user int,
+    title varchar(40),
+    duration int,
+    note int,
+    plataform varchar(40),
+    primary key(id_movie),
+    foreign key(id_user) references user_(id_user)
+);
