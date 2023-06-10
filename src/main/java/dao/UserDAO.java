@@ -106,7 +106,7 @@ public class UserDAO {
         return false;
     }
 
-    public boolean dellUser(int id){//método utilizado para deletar um usuário do banco de dados//smi
+    public boolean dellUser(int id){//método utilizado para deletar um usuário do banco de dados//
         try(Connection connection = new ConnectDB().getConexao()){
             this.sql = "DELETE FROM user_ WHERE id_user = ?";
             this.stmt = connection.prepareStatement(this.sql);

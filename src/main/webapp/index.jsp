@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.User" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -23,6 +24,9 @@
                     <input type="password" class="form-control" id="password" name="password" required placeholder="insiraSuaSenha123">
                 </div>
                 <button type="submit" class="btn btn-success btn-block">Entrar</button>
+                <% if("erro" != null) { %>
+                <div class="danger">${erro}</div>
+                <%}%>
             </form>
             <h5>Ainda não tem conta? Faça uma <a href="InsertUser.jsp">agora</a> mesmo!</h5>
         </div>

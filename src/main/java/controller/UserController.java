@@ -34,6 +34,10 @@ public class UserController extends HttpServlet {
                     System.out.println("logou");
                     req.setAttribute("user", u2);
                     rd = req.getRequestDispatcher("mainMenu.jsp");
+                }else{
+                    String erro = "Usário não encontrado";
+                    req.setAttribute("erro", erro);
+                    rd = req.getRequestDispatcher("index.jsp");
                 }
             }
             case "insert" -> {
@@ -59,13 +63,15 @@ public class UserController extends HttpServlet {
                 u.setPassword(password);
                 if (us.editUser(u)) {
                     System.out.println("editou");
+                    req.setAttribute("user", u);
                     rd = req.getRequestDispatcher("mainMenu.jsp");
                 }
             }
             case "dell" -> {
-                if (us.dellUser(id)) {
+                u.setId(id);
+                if (us.dellUser(u.getId())) {
                     System.out.println("excluiu o user");
-                    //codigos de redirecionamento//
+                    rd = req.getRequestDispatcher("index.jsp");
                 }
             }
         }
