@@ -15,15 +15,28 @@
       <div class="header">
         <h2 class="text-center mb-4">Tela Principal</h2>
         <div class="d-flex justify-content-between align-items-center mb-4">
-          <button class="btn btn-link">Editar Perfil</button>
-          <button class="btn btn-danger">Sair</button>
+          <form action="UserController">
+            <input type="hidden" name="acao" value="editUser"></input
+            <button type="submit" class="btn btn-link">Editar Perfil</button>
+          </form>
+          <a href="index.jsp" class="btn btn-danger">Sair</a>
         </div>
       </div>
       <div class="content">
         <div class="text-center">
-          <button class="btn btn-primary">Filmes</button>
-          <button class="btn btn-primary">Livros</button>
-          <button class="btn btn-primary">Desenhos</button>
+          <form action="MovieController">
+            <input type="hidden" name="acao" value="listMovie"></input
+            <input type="hidden" name="id" value=${user.id}></input
+            <button type="submit" class="btn btn-primary">Filmes</button>
+          </form>
+          <form action="BookController">
+            <input type="hidden" name="acao" value="listBook"></input
+            <button type="submit" class="btn btn-primary">Livros</button>
+          </form>
+          <form action="CartoonController">
+            <input type="hidden" value="listCartoon"></input
+            <button type="submit" class="btn btn-primary">Cartoons</button>
+          </form>
         </div>
       </div>
     </div>
