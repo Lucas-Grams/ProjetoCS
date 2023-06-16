@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>InsertMovie</title>
@@ -23,23 +24,22 @@
             <div class="content">
                 <form id="movie-form" action="MovieController">
                     <input type="hidden" name="acao" value="insertMovie">
-                    <%if(movie != null){%> <input type="hidden" name="acao" value="insertMovie"><%  }%>
                     <input type="hidden" name="idUser" value=${idUser}>
                     <div class="form-group">
                         <label for="title">Título:</label>
-                        <input type="text" class="form-control" id="title" name="title" <%if(movie != null){ %> value=${movie.title}<%}%> required>
+                        <input type="text" class="form-control" id="title" name="title" required>
                     </div>
                     <div class="form-group">
                         <label for="rating">Nota:</label>
-                        <input type="number" class="form-control" id="rating" name="rating" step="0.1" min="0" max="10" <%if(movie != null){ %> value=${movie.note}<%}%> required>
+                        <input type="number" class="form-control" id="rating" name="rating" step="0.1" min="0" max="10" required>
                     </div>
                     <div class="form-group">
                         <label for="duration">Duração:</label>
-                        <input type="text" class="form-control" id="duration" name="duration" <%if(movie != null){ %> value=${movie.duration}<%}%> required>
+                        <input type="text" class="form-control" id="duration" name="duration"  required>
                     </div>
                     <div class="form-group">
                         <label for="platform">Plataforma:</label>
-                        <input type="text" class="form-control" id="platform" name="platform" <%if(movie != null){ %> value=${movie.plataform}<%}%> required>
+                        <input type="text" class="form-control" id="platform" name="platform" required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Inserir</button>
                 </form>

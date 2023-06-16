@@ -14,19 +14,15 @@ public class CartoonDAO {
     private String sql;
     private PreparedStatement stmt;
     private ResultSet rs;
-    public ArrayList<Cartoon> getCartoons(User u){
+    public ArrayList<Cartoon> getCartoons(int id){
         ArrayList<Cartoon> cartoons = new ArrayList<Cartoon>();
         Cartoon cartoon = new Cartoon();
         try(Connection connection = new ConnectDB().getConexao()){
             this.sql = "Select * FROM cartoon WHERE id_user = ?";
             this.stmt = connection.prepareStatement(this.sql);
-            this.stmt.setInt(1,u.getId());
+            this.stmt.setInt(1,id);
             this.rs = this.stmt.executeQuery();
             while(rs.next()){
-                cartoon.setId(rs.getInt("id_filme"));
-                cartoon.setTitle(rs.getString("title"));
-                cartoon.setNote(rs.getInt("note"));
-                cartoon.setEpisodes(rs.getInt("pages"));
                 cartoon.setId(rs.getInt("id_cartoon"));
                 cartoon.setTitle(rs.getString("title"));
                 cartoon.setNote(rs.getInt("note"));
@@ -40,7 +36,26 @@ public class CartoonDAO {
         return cartoons;
     }
 
-    public boolean setCartoon(Cartoon c, User u){
+    public Cartoon getCartoon(int id){
+        Cartoon cartoon = new Cartoon();
+        try(Connection connection = new ConnectDB().getConexao()){
+            this.sql = "Select * FROM cartoon WHERE id_cartoon = ?";
+            this.stmt = connection.prepareStatement(this.sql);
+            this.stmt.setInt(1,id);
+            this.rs = this.stmt.executeQuery();
+            while(rs.next()){
+                cartoon.setId(rs.getInt("id_cartoon"));
+                cartoon.setTitle(rs.getString("title"));
+                cartoon.setNote(rs.getInt("note"));
+                cartoon.setEpisodes(rs.getInt("episodes"));
+                cartoon.setPlataform(rs.getString("plataform"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return cartoon;
+    }
+    public boolean setCartoon(Cartoon c, int id){
         try(Connection connection =  new ConnectDB().getConexao()){
             this.sql = "INSERT INTO cartoon (title, note, episodes, platform, id_user) VALUES (?, ?, ?, ?, ?)";
             this.stmt = connection.prepareStatement(this.sql);
@@ -48,7 +63,7 @@ public class CartoonDAO {
             this.stmt.setInt(2, c.getNote());
             this.stmt.setInt(3, c.getEpisodes());
             this.stmt.setString(4, c.getPlataform());
-            this.stmt.setInt(5, u.getId());
+            this.stmt.setInt(5, id);
             this.stmt.execute();
             return true;
         }catch (SQLException e){
@@ -57,7 +72,7 @@ public class CartoonDAO {
         return false;
     }
 
-    public boolean upCartoon(Cartoon c, User u){
+    public boolean upCartoon(Cartoon c){
         try(Connection connection = new ConnectDB().getConexao()) {
             this.sql = "UPDATE cartoon SET title = ?, note = ?, episodes = ?, plataform = ? WHERE id_cartoon = ?";
             this.stmt = connection.prepareStatement(this.sql);
@@ -74,12 +89,11 @@ public class CartoonDAO {
         return false;
     }
 
-    public boolean dellCartoon(Cartoon c){
+    public boolean dellCartoon(int id){
         try(Connection connection = new ConnectDB().getConexao()){
-            this.sql = "DELETE FROM cartoon WHERE id_cartoon = ?";
             this.sql = "DELETE FROM cartton WHERE id_cartoon = ?";
             this.stmt = connection.prepareStatement(this.sql);
-            this.stmt.setInt(1, c.getId());
+            this.stmt.setInt(1, id);
             return this.stmt.execute();
         }catch (SQLException e){
             e.printStackTrace();

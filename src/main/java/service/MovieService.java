@@ -29,4 +29,25 @@ public class MovieService {
             return false;
         }
     }
+
+    public boolean editMovie(Movie m){
+        if(md.upMovie(m)){
+            System.out.println("deu certo pexe");
+            return true;
+        }else{
+            System.out.println("deu merda no brique");
+            return false;
+        }
+    }
+
+    public boolean dellMovie(int id){
+        if(md.dellMovie(id)){
+            System.out.println("exlcuido com sucesso");
+            return true;
+        }else{
+            System.out.println("deu pau na exclusao");
+            return false;
+        }
+    }
+
 }

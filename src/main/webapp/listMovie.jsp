@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
     <title>ListMovie</title>
@@ -38,26 +40,26 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <%for (m : movies) {%>
+                    <c:forEach items="${movies}" var="m">
                     <tr>
-                        <td>m.title</td>
-                        <td>m.note</td>
-                        <td>m.duration</td>
-                        <td>m.plataform</td>
+                        <td>${m.getTitle()}</td>
+                        <td>${m.getNote()}</td>
+                        <td>${m.getDuration()}</td>
+                        <td>${m.getPlataform()}</td>
                         <td>
                             <form action="insertMovie.jsp" method="post">
                                 <input type="hidden" name="acao" value="edit"></input>
-                                <input type="hidden" name="idMovie" value=${m.id_filme}></input
+                                <input type="hidden" name="idMovie" value=${m.getId()}></input
                                 <button type="submit" class="btn btn-primary btn-sm mr-2">Editar</button>
                             </form>
                             <form action="insertMovie.jsp" method="post">
-                                <input type="hidden" name="acao" value="delMovie"></input>
-                                <input type="hidden" name="idMovie" value=${m.id_filme}></input
+                                <input type="hidden" name="acao" value="dellMovie"></input>
+                                <input type="hidden" name="idMovie" value=${m.getId()}></input
                                 <button type="submit" class="btn btn-primary btn-sm mr-2">Excluir</button>
                             </form>
                         </td>
                     </tr>
-                    <%}%>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

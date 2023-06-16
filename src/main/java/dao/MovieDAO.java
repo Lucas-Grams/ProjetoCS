@@ -73,7 +73,7 @@ public class MovieDAO {
         return false;
     }
 
-    public boolean upMovie(Movie m, User u){
+    public boolean upMovie(Movie m){
         try(Connection connection = new ConnectDB().getConexao()) {
             this.sql = "UPDATE movie SET title = ?, note = ?, duration = ?, plataform = ? WHERE id_movie = ?";
             this.stmt = connection.prepareStatement(this.sql);
@@ -90,11 +90,11 @@ public class MovieDAO {
         return false;
     }
 
-    public boolean dellMovie(Movie m){
+    public boolean dellMovie(int id){
         try(Connection connection = new ConnectDB().getConexao()){
             this.sql = "DELETE FROM movie WHERE id_movie = ?";
             this.stmt = connection.prepareStatement(this.sql);
-            this.stmt.setInt(1, m.getId());
+            this.stmt.setInt(1, id);
             return this.stmt.execute();
         }catch (SQLException e){
             e.printStackTrace();

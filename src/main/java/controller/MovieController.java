@@ -59,7 +59,26 @@ public class MovieController extends HttpServlet {
                 Movie movie = new Movie();
                 movie = ms.listMovie(idMovie);
                 req.setAttribute("movie", movie);
-                req.getRequestDispatcher("insertMovie.jsp");
+                req.getRequestDispatcher("editMovie.jsp");
+            }
+            case "editMovie" ->{
+                m.setId(idMovie);
+                m.setTitle(title);
+                m.setNote(note);
+                m.setPlataform(plataform);
+                m.setDuration(duration);
+                if(ms.editMovie(m)){
+                    System.out.println("alterado com sucesso!");
+                    req.setAttribute("idUser", idUser);
+                    req.getRequestDispatcher("listMovie.jsp");
+                }
+            }
+            case "dellMovie" ->{
+                m.setId(idMovie);
+                if(ms.dellMovie(m.getId())){
+                    System.out.println("escluido com sucesso");
+                    req.getRequestDispatcher("listMovies.jsp");
+                }
             }
             }
 

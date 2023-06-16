@@ -7,41 +7,43 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
-    <title>InsertBook</title>
+    <title>EditMovie</title>
 </head>
 <body>
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
             <div class="header">
-                <h2 class="text-center mb-4">Inserir Livro</h2>
+                <h2 class="text-center mb-4">Editar Filme</h2>
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <button class="btn btn-danger">Sair</button>
                 </div>
             </div>
             <div class="content">
-                <form id="book-form" action="BookController">
-                    <input type="hidden" name="acao" value="insertBook">
+                <form id="movie-form" action="MovieController">
+                    <input type="hidden" name="acao" value="editMovie">
+                    <input type="hidden" name="idMovie" value="${movie.getId()}">
                     <input type="hidden" name="idUser" value=${idUser}>
                     <div class="form-group">
                         <label for="title">Título:</label>
-                        <input type="text" class="form-control" id="title" name="title" required>
+                        <input type="text" class="form-control" id="title" name="title" value="${movie.getTitle()}" required>
                     </div>
                     <div class="form-group">
                         <label for="rating">Nota:</label>
-                        <input type="number" class="form-control" id="rating" name="rating" step="0.1" min="0" max="10" required>
+                        <input type="number" class="form-control" id="rating" name="rating" step="0.1" min="0" max="10" value="${movie.getNote()}" required>
                     </div>
                     <div class="form-group">
-                        <label for="pages">Páginas:</label>
-                        <input type="text" class="form-control" id="pages" name="pages"  required>
+                        <label for="duration">Duração:</label>
+                        <input type="text" class="form-control" id="duration" name="duration" value="${movie.getDuration()}" required>
                     </div>
                     <div class="form-group">
                         <label for="platform">Plataforma:</label>
-                        <input type="text" class="form-control" id="platform" name="platform" required>
+                        <input type="text" class="form-control" id="platform" name="platform" value="${movie.getPlataform()}" required>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Inserir</button>
+                    <button type="submit" class="btn btn-primary btn-block">Salvar</button>
                 </form>
             </div>
         </div>
