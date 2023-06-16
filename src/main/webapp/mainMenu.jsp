@@ -27,7 +27,7 @@
           <form action="MovieController">
             <input type="hidden" name="acao" value="listMovie"></input
             <input type="hidden" name="id" value=${user.id}></input
-            <button type="submit" class="btn btn-primary">Filmes</button>
+            <button type="submit" class="btn btn-success">Filmes</button>
           </form>
           <form action="BookController">
             <input type="hidden" name="acao" value="listBook"></input
