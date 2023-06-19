@@ -27,6 +27,7 @@ public class UserDAO {
         }catch(SQLException e){
             e.printStackTrace();
         }
+
         System.out.println("buscou todos os users");
         return users;
     }

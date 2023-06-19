@@ -17,45 +17,54 @@ public class UserController extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //super.service(req, resp);
         String acao = req.getParameter("acao");
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        String name = req.getParameter("name");
-        String cpf = req.getParameter("cpf");
-        int id = Integer.parseInt(req.getParameter("id"));
         User u = new User();
         UserService us = new UserService();
         RequestDispatcher rd;
         switch (acao) {
             case "login" -> {
+                String email = req.getParameter("email");
+                String password = req.getParameter("password");
                 u.setEmail(email);
                 u.setPassword(password);
                 User u2 = us.login(u);
-                if (u2 != null) {
-                    System.out.println("logou");
-                    req.setAttribute("user", u2);
-                    rd = req.getRequestDispatcher("mainMenu.jsp");
-                }else{
+                if (u2 == null) {
+                    System.out.println("usuario nao encontrado");
                     String erro = "Usário não encontrado";
-                    req.setAttribute("erro", erro);
-                    rd = req.getRequestDispatcher("index.jsp");
+                    req.getSession().setAttribute("erro", erro);
+                    resp.sendRedirect("index.jsp");
+                }else{
+                    System.out.println("logou");
+                    req.getSession().setAttribute("user", u2);
+                    resp.sendRedirect("mainMenu.jsp");
                 }
+
             }
             case "insert" -> {
+                String email = req.getParameter("email");
+                String password = req.getParameter("password");
+                String name = req.getParameter("name");
+                String cpf = req.getParameter("cpf");
                 u.setName(name);
                 u.setCpf(cpf);
                 u.setEmail(email);
                 u.setPassword(password);
                 if (us.insertUser(u)) {
                     System.out.println("cadastrou");
-                    rd = req.getRequestDispatcher("index.jsp");
+                    resp.sendRedirect("index.jsp");
                 }
             }
             case "editUser" -> {
+                int id = Integer.parseInt(req.getParameter("id"));
                 u = us.getUserId(id);
-                req.setAttribute("user", u);
-                rd = req.getRequestDispatcher("insertUser.jsp");
+                req.getSession().setAttribute("user", u);
+                resp.sendRedirect("insertUser.jsp");
             }
             case "edit" -> {
+                String email = req.getParameter("email");
+                String password = req.getParameter("password");
+                String name = req.getParameter("name");
+                String cpf = req.getParameter("cpf");
+                int id = Integer.parseInt(req.getParameter("id"));
                 u.setId(id);
                 u.setName(name);
                 u.setCpf(cpf);
@@ -63,15 +72,16 @@ public class UserController extends HttpServlet {
                 u.setPassword(password);
                 if (us.editUser(u)) {
                     System.out.println("editou");
-                    req.setAttribute("user", u);
-                    rd = req.getRequestDispatcher("mainMenu.jsp");
+                    req.getSession().setAttribute("user", u);
+                    resp.sendRedirect("mainMenu.jsp");
                 }
             }
             case "dell" -> {
+                int id = Integer.parseInt(req.getParameter("id"));
                 u.setId(id);
                 if (us.dellUser(u.getId())) {
                     System.out.println("excluiu o user");
-                    rd = req.getRequestDispatcher("index.jsp");
+                    resp.sendRedirect("index.jsp");
                 }
             }
         }

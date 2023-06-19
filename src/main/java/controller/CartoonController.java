@@ -17,51 +17,63 @@ public class CartoonController extends HttpServlet {
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //super.service(req, resp);
         String acao = req.getParameter("acao");
-        int idUser = Integer.parseInt(req.getParameter("id"));
-        String title = req.getParameter("title");
-        int note = Integer.parseInt(req.getParameter("note"));
-        String plataform = req.getParameter("plataform");
-        int episodes = Integer.parseInt(req.getParameter("episodes"));
-        int idCartoon = Integer.parseInt(req.getParameter("idCartoon"));
         CartoonService cs = new CartoonService();
         Cartoon c = new Cartoon();
         ArrayList<Cartoon> cartoons = new ArrayList<>();
 
         switch (acao) {
             case "listCartoon" -> {
+                int idUser = Integer.parseInt(req.getParameter("id"));
                 cartoons = cs.listCartoons(idUser);
-                req.setAttribute("cartoons", cartoons);
-                req.setAttribute("idUser", idUser);
-                req.getRequestDispatcher("listCartoon.jsp");
+                req.getSession().setAttribute("cartoons", cartoons);
+                req.getSession().setAttribute("idUser", idUser);
+                resp.sendRedirect("listCartoon.jsp");
             }
 
             case "insert" -> {
-                req.setAttribute("idUser", idUser);
-                req.getRequestDispatcher("insertCartoon.jsp");
+                int idUser = Integer.parseInt(req.getParameter("id"));
+                req.getSession().setAttribute("idUser", idUser);
+                resp.sendRedirect("insertCartoon.jsp");
             }
 
             case "insertCartoon" -> {
+                int idUser = Integer.parseInt(req.getParameter("id"));
+                String title = req.getParameter("title");
+                int note = Integer.parseInt(req.getParameter("note"));
+                String plataform = req.getParameter("plataform");
+                int episodes = Integer.parseInt(req.getParameter("episodes"));
                 c.setTitle(title);
                 c.setNote(note);
                 c.setPlataform(plataform);
                 c.setEpisodes(episodes);
                 if (cs.insertCartoon(c, idUser)) {
                     System.out.println("desenho inserido com sucesso");
-                    req.setAttribute("idUser", idUser);
-                    req.getRequestDispatcher("listCartoon.jsp");
+                    cartoons = cs.listCartoons(idUser);
+                    req.getSession().setAttribute("cartoons", cartoons);
+                    req.getSession().setAttribute("idUser", idUser);
+                    resp.sendRedirect("listCartoon.jsp");
                 } else {
                     System.out.println("desenho nao inserido, tente novamente mais tarde");
-                    req.setAttribute("idUser", idUser);
-                    req.getRequestDispatcher("listCartoon.jsp");
+                    cartoons = cs.listCartoons(idUser);
+                    req.getSession().setAttribute("cartoons", cartoons);
+                    req.getSession().setAttribute("idUser", idUser);
+                    resp.sendRedirect("listCartoon.jsp");
                 }
             }
             case "edit" -> {
+                int idCartoon = Integer.parseInt(req.getParameter("idCartoon"));
                 Cartoon cartoon = new Cartoon();
                 cartoon = cs.listCartoon(idCartoon);
-                req.setAttribute("cartoon", cartoon);
-                req.getRequestDispatcher("editCartoon.jsp");
+                req.getSession().setAttribute("cartoon", cartoon);
+                resp.sendRedirect("editCartoon.jsp");
             }
             case "editCartoon" -> {
+                int idUser = Integer.parseInt(req.getParameter("id"));
+                int idCartoon = Integer.parseInt(req.getParameter("idCartoon"));
+                String title = req.getParameter("title");
+                int note = Integer.parseInt(req.getParameter("note"));
+                String plataform = req.getParameter("plataform");
+                int episodes = Integer.parseInt(req.getParameter("episodes"));
                 c.setId(idCartoon);
                 c.setTitle(title);
                 c.setNote(note);
@@ -69,15 +81,21 @@ public class CartoonController extends HttpServlet {
                 c.setEpisodes(episodes);
                 if (cs.editCartoon(c)) {
                     System.out.println("alterado com sucesso!");
-                    req.setAttribute("idUser", idUser);
-                    req.getRequestDispatcher("listCartoon.jsp");
+                    cartoons = cs.listCartoons(idUser);
+                    req.getSession().setAttribute("cartoons", cartoons);
+                    req.getSession().setAttribute("idUser", idUser);
+                    resp.sendRedirect("listCartoon.jsp");
                 }
             }
             case "dellCartoon" -> {
+                int idCartoon = Integer.parseInt(req.getParameter("idCartoon"));
+                int idUser = Integer.parseInt(req.getParameter("id"));
                 c.setId(idCartoon);
                 if (cs.dellCartoon(c.getId())) {
                     System.out.println("excluido com sucesso");
-                    req.getRequestDispatcher("listCartoon.jsp");
+                    cartoons = cs.listCartoons(idUser);
+                    req.getSession().setAttribute("cartoons", cartoons);
+                    resp.sendRedirect("listCartoon.jsp");
                 }
             }
         }

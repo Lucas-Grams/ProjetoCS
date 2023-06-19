@@ -26,10 +26,12 @@
                     <input type="password" class="form-control" id="password" name="password" required placeholder="insiraSuaSenha123">
                 </div>
                 <button type="submit" class="btn btn-success btn-block">Entrar</button>
-                <c:if test="${erro}">
+            </form>
+                <c:set var="erro" value="${requestScope.erro}" />
+                <c:if test="${ erro}">
                 <div class="danger">${erro}</div>
                 </c:if>
-            </form>
+
             <h5>Ainda não tem conta? Faça uma <a href="InsertUser.jsp">agora</a> mesmo!</h5>
         </div>
     </div>

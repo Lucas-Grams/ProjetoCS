@@ -1,4 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,15 +11,18 @@
 </head>
 <body>
 
+
+
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-md-6">
       <div class="header">
-        <h2 class="text-center mb-4">Tela Principal</h2>
+        <h2 class="text-center mb-4">olá ${user.name}!</h2>
         <div class="d-flex justify-content-between align-items-center mb-4">
           <form action="UserController">
-            <input type="hidden" name="acao" value="editUser"></input
-            <button type="submit" class="btn btn-link">Editar Perfil</button>
+            <input type="hidden" name="acao" value="editUser">
+            <input type="hidden" name="id" value="${user.id}">
+            <button type="submit" class="btn btn-primary">Editar Perfil</button>
           </form>
           <a href="index.jsp" class="btn btn-danger">Sair</a>
         </div>
@@ -25,17 +30,21 @@
       <div class="content">
         <div class="text-center">
           <form action="MovieController">
-            <input type="hidden" name="acao" value="listMovie"></input
-            <input type="hidden" name="id" value=${user.id}></input
-            <button type="submit" class="btn btn-success">Filmes</button>
+            <input type="hidden" name="acao" value="listMovie">
+            <input type="hidden" name="id" value="${user.id}">
+            <button type="submit" class="btn btn-outline-primary btn-block">Filmes</button>
           </form>
+          <br>
           <form action="BookController">
-            <input type="hidden" name="acao" value="listBook"></input
-            <button type="submit" class="btn btn-primary">Livros</button>
+            <input type="hidden" name="acao" value="listBook">
+            <input type="hidden" name="id" value="${user.id}">
+            <button type="submit" class="btn btn-outline-primary btn-block" >Livros</button>
           </form>
+          <br>
           <form action="CartoonController">
             <input type="hidden" value="listCartoon"></input
-            <button type="submit" class="btn btn-primary">Cartoons</button>
+            <input type="hidden" name="id" value="${user.id}">
+            <button type="submit" class="btn btn-outline-primary btn-block">Cartoons</button>
           </form>
         </div>
       </div>
