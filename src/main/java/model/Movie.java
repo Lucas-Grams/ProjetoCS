@@ -1,13 +1,13 @@
 package model;
 
 public class Movie extends Work{
-    private int duration;
+    private double duration;
 
-    public int getDuration() {
+    public double getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(double duration) {
         this.duration = duration;
     }
 }

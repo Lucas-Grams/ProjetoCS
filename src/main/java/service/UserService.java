@@ -12,6 +12,7 @@ public class UserService {
         users = this.ud.getUsers();
         for (User us: users) {
             if(u.getEmail().equals(us.getEmail()) && u.getPassword().equals(us.getPassword())){
+                System.out.println(us.getId());
                 return us;
             }
         }

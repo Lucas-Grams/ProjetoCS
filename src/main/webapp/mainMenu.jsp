@@ -10,18 +10,15 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
-
-
-
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-md-6">
       <div class="header">
-        <h2 class="text-center mb-4">olá ${user.name}!</h2>
+        <h2 class="text-center mb-4">olá ${user.name}${user.id}!</h2>
         <div class="d-flex justify-content-between align-items-center mb-4">
           <form action="UserController">
             <input type="hidden" name="acao" value="editUser">
-            <input type="hidden" name="id" value="${user.id}">
+            <input type="text" name="id" value="${user.id}">
             <button type="submit" class="btn btn-primary">Editar Perfil</button>
           </form>
           <a href="index.jsp" class="btn btn-danger">Sair</a>

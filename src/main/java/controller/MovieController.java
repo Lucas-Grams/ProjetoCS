@@ -25,6 +25,8 @@ public class MovieController extends HttpServlet {
             case "listMovie" ->{
                 int idUser = Integer.parseInt(req.getParameter("id"));
                 movies = ms.listMovies(idUser);
+                System.out.println(idUser);
+                System.out.println("buscou os filmes");
                 req.getSession().setAttribute("movies", movies);
                 req.getSession().setAttribute("idUser", idUser);
                 resp.sendRedirect("listMovie.jsp");
@@ -32,6 +34,7 @@ public class MovieController extends HttpServlet {
 
             case "insert"->{
                 int idUser = Integer.parseInt(req.getParameter("id"));
+                System.out.println(idUser);
                 req.getSession().setAttribute("idUser", idUser);
                 resp.sendRedirect("insertMovie.jsp");
             }

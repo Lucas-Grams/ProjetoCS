@@ -26,13 +26,14 @@ public class MovieDAO {
                 movie.setId(rs.getInt("id_filme"));
                 movie.setTitle(rs.getString("title"));
                 movie.setNote(rs.getInt("note"));
-                movie.setDuration(rs.getInt("duration"));
+                movie.setDuration(rs.getDouble("duration"));
                 movie.setPlataform(rs.getString("plataform"));
                 movies.add(movie);
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
+        System.out.println("buscou os filmes DAO");
         return movies;
     }
 
@@ -47,7 +48,7 @@ public class MovieDAO {
                 movie.setId(rs.getInt("id_filme"));
                 movie.setTitle(rs.getString("title"));
                 movie.setNote(rs.getInt("note"));
-                movie.setDuration(rs.getInt("duration"));
+                movie.setDuration(rs.getDouble("duration"));
                 movie.setPlataform(rs.getString("plataform"));
             }
         }catch (SQLException e){
@@ -62,7 +63,7 @@ public class MovieDAO {
             this.stmt = connection.prepareStatement(this.sql);
             this.stmt.setString(1, m.getTitle());
             this.stmt.setInt(2, m.getNote());
-            this.stmt.setInt(3, m.getDuration());
+            this.stmt.setDouble(3, m.getDuration());
             this.stmt.setString(4, m.getPlataform());
             this.stmt.setInt(5, id);
             this.stmt.execute();
@@ -79,7 +80,7 @@ public class MovieDAO {
             this.stmt = connection.prepareStatement(this.sql);
             this.stmt.setString(1, m.getTitle());
             this.stmt.setInt(2, m.getNote());
-            this.stmt.setInt(3, m.getDuration());
+            this.stmt.setDouble(3, m.getDuration());
             this.stmt.setString(4, m.getPlataform());
             this.stmt.setInt(5, m.getId());
             this.stmt.execute();

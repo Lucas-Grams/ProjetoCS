@@ -22,10 +22,10 @@
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <form action="MovieController" method="post">
                         <input type="hidden" name="acao" value="insert"></input>
-                        <input type="hidden" name="idUser" value=${idUser}></input>
+                        <input type="hidden" name="id" value=${idUser}></input>
                         <button type="submit" class="btn btn-primary">Adicionar Filmes</button>
                     </form>
-                    <button class="btn btn-danger">Sair</button>
+                    <a href="index.jsp" class="btn btn-danger">Sair</a>
                 </div>
             </div>
             <div class="content">
@@ -42,19 +42,19 @@
                     <tbody>
                     <c:forEach items="${movies}" var="m">
                     <tr>
-                        <td>${m.getTitle()}</td>
-                        <td>${m.getNote()}</td>
-                        <td>${m.getDuration()}</td>
-                        <td>${m.getPlataform()}</td>
+                        <td>${m.title}</td>
+                        <td>${m.note}</td>
+                        <td>${m.duration}</td>
+                        <td>${m.plataform}</td>
                         <td>
                             <form action="insertMovie.jsp" method="post">
                                 <input type="hidden" name="acao" value="edit"></input>
-                                <input type="hidden" name="idMovie" value=${m.getId()}></input
+                                <input type="hidden" name="idMovie" value=${m.id}></input
                                 <button type="submit" class="btn btn-primary btn-sm mr-2">Editar</button>
                             </form>
                             <form action="insertMovie.jsp" method="post">
                                 <input type="hidden" name="acao" value="dellMovie"></input>
-                                <input type="hidden" name="idMovie" value=${m.getId()}></input
+                                <input type="hidden" name="idMovie" value=${m.id}></input
                                 <button type="submit" class="btn btn-primary btn-sm mr-2">Excluir</button>
                             </form>
                         </td>

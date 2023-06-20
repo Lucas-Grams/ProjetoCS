@@ -35,7 +35,7 @@ CREATE TABLE movie(
     id_movie serial,
     id_user int,
     title varchar(40),
-    duration int,
+    duration numeric,
     note int,
     plataform varchar(40),
     primary key(id_movie),

@@ -18,6 +18,7 @@ public class MovieService {
     public ArrayList<Movie> listMovies(int idUser){
         ArrayList<Movie> movies = new ArrayList<>();
         movies = md.getMovies(idUser);
+        System.out.println("buscou os filmes");
         return movies;
     }
 
